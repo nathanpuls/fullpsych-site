@@ -75,5 +75,5 @@ content:
   - name: not-found
     label: 404 Page
     type: file
-    path: 404.njk
+    path: src/404.njk
     format: code
