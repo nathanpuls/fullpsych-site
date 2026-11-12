@@ -15,7 +15,11 @@
   <body>
     <header class="site-header" id="site-header">
       <a class="brand" href="/" data-shell-link><img src="{{ site.logo }}" alt=""><span>{{ site.name }}</span></a>
-      <nav aria-label="Main navigation">
+      <button class="mobile-menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <nav id="site-nav" aria-label="Main navigation">
         {% for item in collections.navigationPages %}
           <a href="{{ item.url }}" data-shell-link{% if item.data.slug == slug %} aria-current="page"{% endif %}>{{ item.data.navLabel or item.data.title }}</a>
         {% endfor %}
