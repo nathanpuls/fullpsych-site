@@ -72,3 +72,8 @@ content:
       - { name: url, label: Website URL, type: string }
       - { name: logo, label: Logo, type: image }
       - { name: portrait, label: Portrait, type: image }
+  - name: not-found
+    label: 404 Page
+    type: file
+    path: 404.njk
+    format: code
