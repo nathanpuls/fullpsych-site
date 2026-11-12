@@ -1,0 +1,4 @@
+---
+layout: base.njk
+---
+<article class="article-page page-width"><a class="article-back" href="/articles/">← All articles</a><header>{% if date %}<p class="eyebrow">{{ date | readableDate }}</p>{% endif %}<h1>{{ title }}</h1>{% if description %}<p class="article-lead">{{ description }}</p>{% endif %}</header>{% if image %}<img class="article-image" src="{{ image }}" alt="{{ imageAlt or '' }}">{% endif %}<div class="prose article-body">{{ content | safe }}</div></article>

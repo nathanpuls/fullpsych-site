@@ -1,0 +1,74 @@
+media:
+  input: public/uploads
+  output: /uploads
+
+settings:
+  content:
+    merge: true
+  commit:
+    identity: user
+
+content:
+  - name: pages
+    label: Pages
+    type: collection
+    path: src/content/pages
+    filename: "{fields.slug}.md"
+    view:
+      fields: [title, slug, published, showInNavigation]
+      primary: title
+      sort: [navOrder, title]
+    fields:
+      - { name: title, label: Page title, type: string, required: true }
+      - { name: slug, label: URL slug, type: string, required: true, description: "Use lowercase words separated by hyphens. The page is published at /this-slug/." }
+      - { name: navLabel, label: Navigation label, type: string, required: true }
+      - { name: navOrder, label: Navigation order, type: number, default: 100 }
+      - { name: showInNavigation, label: Show in navigation, type: boolean, default: true }
+      - { name: published, label: Published, type: boolean, default: true }
+      - name: template
+        label: Page style
+        type: select
+        default: standard
+        options:
+          values:
+            - { value: standard, label: Standard page }
+            - { value: home, label: Home page }
+            - { value: profile, label: Profile page }
+            - { value: approach, label: Approach page }
+            - { value: contact, label: Contact page }
+            - { value: articles-index, label: Articles index }
+      - { name: description, label: Search description, type: text }
+      - { name: image, label: Page image, type: image, required: false }
+      - { name: body, label: Page content, type: rich-text, required: true }
+
+  - name: articles
+    label: Articles
+    type: collection
+    path: src/content/articles
+    filename: "{fields.slug}.md"
+    view:
+      fields: [title, date, published]
+      primary: title
+      sort: [date, title]
+    fields:
+      - { name: title, label: Article title, type: string, required: true }
+      - { name: slug, label: URL slug, type: string, required: true }
+      - { name: date, label: Publication date, type: date, required: true }
+      - { name: published, label: Published, type: boolean, default: true }
+      - { name: description, label: Summary, type: text }
+      - { name: image, label: Featured image, type: image, required: false }
+      - { name: imageAlt, label: Image description, type: string, required: false }
+      - { name: body, label: Article body, type: rich-text, required: true }
+
+  - name: site
+    label: Site settings
+    type: file
+    path: src/_data/site.json
+    fields:
+      - { name: name, label: Practice name, type: string, required: true }
+      - { name: practitioner, label: Practitioner, type: string, required: true }
+      - { name: tagline, label: Tagline, type: text }
+      - { name: description, label: Site description, type: text }
+      - { name: url, label: Website URL, type: string }
+      - { name: logo, label: Logo, type: image }
+      - { name: portrait, label: Portrait, type: image }
