@@ -16,15 +16,15 @@ When explicitly asked to **Publish FullPsych**, update `publish.json` on `main`:
 
 ChatGPT's connected GitHub tools do not expose workflow dispatch, but repository write tools can update this file. Voice can use this route only when GitHub write tools are available in that conversation. Check the resulting workflow run before reporting a successful deployment.
 
-## One-time deployment setup
+## Deployment setup
 
-- Add the repository Actions secret `CLOUDFLARE_API_TOKEN`: a Cloudflare API token with **Account → Cloudflare Pages → Edit**, restricted to account `ed3b0af15e1c2b8a6a351cc929b0a312`.
+- Configured repository Actions secret `CLOUDFLARE_API_TOKEN`: a Cloudflare API token with **Account → Cloudflare Pages → Edit**, restricted to account `ed3b0af15e1c2b8a6a351cc929b0a312`.
 - The existing project is `fullpsych-site`, production branch `main`, output `_site`.
-- Run Publish FullPsych once and verify it succeeds.
-- Only after that succeeds, in Cloudflare Pages → fullpsych-site → Settings → Builds & deployments → Branch control: disable automatic production deployments and select no preview branches.
+- Publishing through `publish.json` was verified successfully: https://github.com/nathanpuls/fullpsych-site/actions/runs/43357467587
+- Cloudflare automatic production deployments are disabled; preview branch deployments are set to None.
 - If Pages CMS requests updated GitHub App access, approve **Actions: read and write** for this repository so its Publish action can dispatch the workflow.
 
-Until the Cloudflare branch controls are changed, automatic deployments remain enabled.
+GitHub content edits remain unpublished until an explicit publish request. Credentials are already configured and do not need to be requested for normal publishing.
 
 ## Local preview
 
