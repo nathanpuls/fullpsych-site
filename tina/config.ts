@@ -52,6 +52,7 @@ export default defineConfig({
         { type: 'string', name: 'web3formsKey', label: 'Web3Forms public access key' },
         { type: 'boolean', name: 'showFooter', label: 'Show footer', ui: { defaultValue: true } },
         { type: 'string', name: 'footerText', label: 'Footer text (left)', ui: { component: 'textarea' } },
+        { type: 'string', name: 'footerLink', label: 'Footer link (left)', description: 'Optional. Use /admin for the editor, or leave blank for plain text.', ui: { validate: (value: string) => !value || /^(\/(?!\/)|https?:\/\/)/i.test(value) ? undefined : 'Use a path starting with / or an https:// URL.' } },
         { type: 'string', name: 'footerSecondaryText', label: 'Footer text (right)', ui: { component: 'textarea' } },
         { type: 'object', name: 'navigation', label: 'Navigation', list: true,
           ui: { itemProps: (item) => ({ label: item.label || 'New link' }) },
