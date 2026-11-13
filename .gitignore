@@ -10,3 +10,9 @@ tina/__generated__/
 public/admin/
 .DS_Store
 node_modules
+
+public/generated-icons/
+public/favicon.ico
+public/apple-touch-icon.png
+public/site.webmanifest
+src/generated/brand-icons.json

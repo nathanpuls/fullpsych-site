@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import '../styles/site.css';
+import brandIcons from '../generated/brand-icons.json';
 import EditableRegion from '../components/EditableRegion.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -15,6 +16,28 @@ const settings = result.data.settings;
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content={description || settings.description} />
   <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" href={`${brandIcons.base}/favicon.ico`} sizes="16x16 32x32 48x48" />
+  {[16, 32, 48].map(size => <link rel="icon" type="image/png" sizes={`${size}x${size}`} href={`${brandIcons.base}/favicon-${size}.png`} />)}
+  {[120, 152, 167, 180].map(size => <link rel="apple-touch-icon" sizes={`${size}x${size}`} href={`${brandIcons.base}/apple-touch-icon-${size}.png`} />)}
+  <link rel="manifest" href={`${brandIcons.base}/site.webmanifest`} />
+  <meta name="application-name" content={settings.name} />
+  <meta name="apple-mobile-web-app-title" content={settings.name} />
+  <meta name="msapplication-TileColor" content="#ffffff" />
+  <meta name="msapplication-TileImage" content={`${brandIcons.base}/mstile-144.png`} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={settings.name} />
+  <meta property="og:title" content={home ? settings.name : `${title} · ${settings.name}`} />
+  <meta property="og:description" content={description || settings.description} />
+  <meta property="og:url" content={new URL(Astro.url.pathname, settings.url).href} />
+  <meta property="og:image" content={new URL(`${brandIcons.base}/social-preview.png`, settings.url).href} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={`${settings.name} logo`} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={home ? settings.name : `${title} · ${settings.name}`} />
+  <meta name="twitter:description" content={description || settings.description} />
+  <meta name="twitter:image" content={new URL(`${brandIcons.base}/social-preview.png`, settings.url).href} />
+  <meta name="twitter:image:alt" content={`${settings.name} logo`} />
   <title>{home ? settings.name : `${title} · ${settings.name}`}</title>
   <link rel="canonical" href={new URL(Astro.url.pathname, settings.url)} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
