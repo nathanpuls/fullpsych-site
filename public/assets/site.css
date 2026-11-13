@@ -66,10 +66,14 @@ a { color: inherit; text-underline-offset: 4px; }
 .article-lead { color: var(--muted); font-size: 1.25rem; line-height: 1.65; }
 .article-image { width: 100%; margin: 35px 0; border-radius: 18px; }
 .empty-state { color: var(--muted); }
-.site-footer { min-height: 64px; display: flex; justify-content: space-between; gap: 20px; padding: 22px 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+.site-footer { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+.site-footer > span { min-width: 0; }
+.footer-admin { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; margin-left: auto; border-radius: 8px; text-decoration: none; }
+.footer-admin:hover { background: var(--surface); color: var(--ink); }
+.footer-admin:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 @media (max-width: 760px) {
   .site-header { align-items: center; padding: 12px 18px; }
-  .mobile-menu-toggle { display: grid; place-items: center; width: 42px; height: 42px; margin-left: auto; border: 0; border-radius: 8px; background: transparent; color: var(--ink); cursor: pointer; }
+  .mobile-menu-toggle { display: grid; place-items: center; flex-shrink: 0; width: 48px; height: 48px; margin-left: auto; border: 0; border-radius: 8px; background: transparent; color: var(--ink); cursor: pointer; }
   .mobile-menu-toggle:hover { background: var(--surface); }
   .mobile-menu-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   .mobile-menu-toggle .close-icon { display: none; }
@@ -82,8 +86,7 @@ a { color: inherit; text-underline-offset: 4px; }
   .home-hero::after { display: none; }
   .profile-grid, .contact-page { grid-template-columns: 1fr; }
   .profile-photo { grid-row: 1; width: min(100%,420px); margin-inline: auto; }
-  .site-footer { display: block; }
-  .site-footer span { display: block; margin: 4px 0; }
+  .site-footer { padding-inline: 18px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 

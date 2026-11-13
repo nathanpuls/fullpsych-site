@@ -1,10 +1,14 @@
 ---
 import { tinaField } from '@tinacms/astro';
+import LucideIcon from './LucideIcon.astro';
 const { settings, pathname = Astro.url.pathname } = Astro.props;
 ---
 <header class="site-header" id="site-header">
   <a class="brand" href="/"><img src={settings.logo} alt="" /><span data-tina-field={tinaField(settings, 'name')}>{settings.name}</span></a>
-  <button class="mobile-menu-toggle" type="button" aria-controls="main-navigation" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+  <button class="mobile-menu-toggle" type="button" aria-controls="main-navigation" aria-expanded="false" aria-label="Toggle navigation">
+    <LucideIcon name="menu" class="menu-icon" size={28} />
+    <LucideIcon name="x" class="close-icon" size={28} />
+  </button>
   <nav id="main-navigation" aria-label="Main navigation" data-tina-field={tinaField(settings, 'navigation')}>
     {settings.navigation?.map((item: any) => item && item.hidden !== true && <a href={item.url} aria-current={item.url === pathname ? 'page' : undefined} data-tina-field={tinaField(item, 'label')}>{item.label}</a>)}
   </nav>

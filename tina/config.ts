@@ -59,9 +59,9 @@ export default defineConfig({
         { type: 'image', name: 'portrait', label: 'Default portrait' },
         { type: 'string', name: 'web3formsKey', label: 'Web3Forms public access key' },
         { type: 'boolean', name: 'showFooter', label: 'Show footer', ui: { defaultValue: true } },
-        { type: 'string', name: 'footerText', label: 'Footer text (left)', ui: { component: 'textarea' } },
-        { type: 'string', name: 'footerLink', label: 'Footer link (left)', description: 'Optional. Use /admin for the editor, or leave blank for plain text.', ui: { validate: (value: string) => !value || /^(\/(?!\/)|https?:\/\/)/i.test(value) ? undefined : 'Use a path starting with / or an https:// URL.' } },
-        { type: 'string', name: 'footerSecondaryText', label: 'Footer text (right)', ui: { component: 'textarea' } },
+        { type: 'string', name: 'footerText', label: 'Admin link label', ui: { component: 'textarea' } },
+        { type: 'string', name: 'footerLink', label: 'Admin link URL', description: 'Use /admin for the editor. Leave blank to hide the lock link.', ui: { validate: (value: string) => !value || /^(\/(?!\/)|https?:\/\/)/i.test(value) ? undefined : 'Use a path starting with / or an https:// URL.' } },
+        { type: 'string', name: 'footerSecondaryText', label: 'Footer text', ui: { component: 'textarea' } },
         { type: 'object', name: 'navigation', label: 'Navigation', list: true,
           ui: { itemProps: (item) => ({ label: item.label || 'New link' }) },
           fields: [

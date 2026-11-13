@@ -1,11 +1,11 @@
 ---
 import { tinaField } from '@tinacms/astro';
+import LucideIcon from './LucideIcon.astro';
 const { settings } = Astro.props;
-const FooterText = settings.footerLink ? 'a' : 'span';
 ---
 {settings.showFooter !== false && (
   <footer class="site-footer">
-    <FooterText href={settings.footerLink || undefined} style="white-space: pre-line" data-tina-field={tinaField(settings, 'footerText')}>{settings.footerText}</FooterText>
     <span style="white-space: pre-line" data-tina-field={tinaField(settings, 'footerSecondaryText')}>{settings.footerSecondaryText}</span>
+    {settings.footerLink && <a class="footer-admin" href={settings.footerLink} aria-label={settings.footerText || 'Admin'} title={settings.footerText || 'Admin'}><LucideIcon name="lock" size={20} /></a>}
   </footer>
 )}
