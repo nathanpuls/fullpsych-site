@@ -10,11 +10,19 @@ export function PublishScreen({ cms }: { cms: TinaCMS }) {
     }
     setBusy(true); setMessage('');
     try {
+      if (!cms.api.tina.isLocalMode) {
+        if (cms.api.tina.getBranch() !== 'main') throw new Error('Publishing is only available from main.');
+        await cms.api.tina.request(`mutation PublishFullPsych($revision: Float!) {
+          updatePublishRequest(relativePath: "publish.json", params: { revision: $revision }) { revision }
+        }`, { variables: { revision: Date.now() } });
+        setMessage('Publish requested. GitHub Actions is building and deploying your saved changes.');
+        return;
+      }
       const response = await fetch('/api/fullpsych/publish', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || 'Publishing failed.');
       setMessage(result.message);
-    } catch (error: any) { setMessage(error.message || 'Could not reach the local FullPsych server. Reopen Open FullPsych.'); }
+    } catch (error: any) { setMessage(error.message || 'Publishing failed. Please try again.'); }
     finally { setBusy(false); }
   }
   return <div style={{ padding: '36px', maxWidth: '680px', fontFamily: 'inherit' }}>

@@ -1,0 +1,10 @@
+---
+import { tinaField } from '@tinacms/astro';
+const { settings } = Astro.props;
+---
+{settings.showFooter !== false && (
+  <footer class="site-footer">
+    <span style="white-space: pre-line" data-tina-field={tinaField(settings, 'footerText')}>{settings.footerText}</span>
+    <span style="white-space: pre-line" data-tina-field={tinaField(settings, 'footerSecondaryText')}>{settings.footerSecondaryText}</span>
+  </footer>
+)}

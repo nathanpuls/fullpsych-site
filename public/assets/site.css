@@ -91,4 +91,4 @@ a { color: inherit; text-underline-offset: 4px; }
 .site-header-wrapper { position: sticky; top: 0; z-index: 1000; }
 .page-content { flex: 1 0 auto; min-height: 0; outline: none; }
 
-.site-header-wrapper, .site-footer { flex-shrink: 0; }
+.site-header-wrapper, .site-footer-wrapper, .site-footer { flex-shrink: 0; }

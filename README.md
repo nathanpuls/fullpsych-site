@@ -2,7 +2,13 @@
 
 Astro + TinaCMS, with GitHub as the source of truth and deliberate publishing to the existing Cloudflare Pages project `fullpsych-site` at https://fullpsych.com.
 
-## Editing on the Mac
+## Editing from any computer
+
+Open https://www.fullpsych.com/admin and sign in with TinaCloud. The connected project is `b3f694eb-35c8-49ac-9230-197fcc84c354`, using `nathanpuls/fullpsych-site` on `main`.
+
+**Save** commits content and images to GitHub without deploying. **Site → Publish → Publish FullPsych** updates only `publish.json` through the authenticated Tina API. That commit triggers the existing GitHub Action to build and deploy to Cloudflare Pages. No GitHub token or Cloudflare credential is exposed in the editor.
+
+## Editing locally on the Mac
 
 Double-click **Edit-FullPsych.command**. It starts the local server, waits for it to become ready, and opens the editor. Tina opens at http://localhost:4323/admin/index.html#/~/ with a live website preview. The server runs in the background; closing the launcher window does not stop it. Reopen the launcher whenever you need the editor.
 
@@ -13,7 +19,7 @@ Double-click **Edit-FullPsych.command**. It starts the local server, waits for i
 
 **Update-FullPsych.command** pulls GitHub changes when the working copy is clean. The running Astro preview refreshes. It stops if local edits need reconciling rather than overwriting them. Opening Edit FullPsych also pulls when clean.
 
-**Tina → Publish → Publish FullPsych** commits and pushes saved local changes, updating `publish.json` to request the existing GitHub Action. The same action is also available through **Publish-FullPsych.command**. The publishing handler runs only on the local development server, with the Mac’s existing GitHub authentication. Commit and push can also be done with ordinary Git tools.
+**Tina → Publish → Publish FullPsych** commits and pushes saved local changes, updating `publish.json` to request the existing GitHub Action. The same action is also available through **Publish-FullPsych.command**. In the local editor, the publishing handler uses the Mac’s existing GitHub authentication. The hosted editor uses TinaCloud instead. Commit and push can also be done with ordinary Git tools.
 
 ## GitHub and publishing
 
@@ -39,9 +45,9 @@ The original five page URLs, `/articles/art1/`, published status, article date, 
 
 ## Tina account and hosting
 
-Tina is configured in local mode: no additional token or TinaCloud account is needed. Its official Astro integration supplies live editing on the Mac. The production output is static and deliberately excludes the local-only admin and API. `/admin/` on the public site is not a hosted editor.
+The static production build includes the TinaCloud admin. Tina’s CLI builds the hosted admin against the cloud API while Astro reads the checked-out content through the temporary local data service. The temporary build service is not deployed. TinaCloud handles editor authentication and GitHub commits. The existing Cloudflare project and GitHub Actions deployment remain in use.
 
-Editing from another computer without running the project locally would require connecting the GitHub repository to a TinaCloud project (or hosting Tina's data layer). That is a separate account setup, not required for this workflow. Nothing automatically pushes or reconciles unsaved local edits with GitHub.
+Local development still saves files on the Mac. Pull GitHub changes before local editing; local saves are not uploaded until committed and pushed.
 
 ## Migration / rollback
 

@@ -2,6 +2,7 @@
 import { ClientRouter } from 'astro:transitions';
 import EditableRegion from '../components/EditableRegion.astro';
 import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import { getSettings } from '../lib/data';
 const { title, description, home = false } = Astro.props;
 const result = await getSettings();
@@ -26,6 +27,8 @@ const settings = result.data.settings;
     <Header settings={settings} />
   </EditableRegion>
   <slot />
-  <footer class="site-footer"><span>{settings.name}</span><span>Telehealth in Texas &amp; Washington</span></footer>
+  <EditableRegion name="footer" wrapper={{ tag: 'div', className: 'site-footer-wrapper' }}>
+    <Footer settings={settings} />
+  </EditableRegion>
 </body>
 </html>
