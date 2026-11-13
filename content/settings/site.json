@@ -1,8 +1,8 @@
 {
   "name": "Full Psych",
   "practitioner": "Nathan Puls, PMHNP-BC",
-  "tagline": "Thoughtful, straightforward mental health care for adults in Texas and Washington.",
-  "description": "Psychiatric evaluations and medication management for adults in Texas and Washington. Telehealth care for ADHD, anxiety, and depression.",
+  "tagline": "Thoughtful, straightforward mental health care for adults in Texas. Washington coming soon.",
+  "description": "Psychiatric evaluations and medication management for adults in Texas. Washington telehealth coming soon.",
   "url": "https://fullpsych.com",
   "logo": "/assets/logo.png",
   "portrait": "/assets/nathan-puls.png",
@@ -10,7 +10,7 @@
   "showFooter": true,
   "footerText": "Admin",
   "footerLink": "/admin",
-  "footerSecondaryText": "Telehealth in Texas & Washington",
+  "footerSecondaryText": "Texas telehealth · Washington coming soon",
   "navigation": [
     {
       "label": "home",
