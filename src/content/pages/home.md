@@ -20,4 +20,4 @@ My approach is simple: listen carefully, explain your options clearly, and work 
 
 **Texas & Washington**  
 Telehealth appointments  
-English & Spanish — preview sync test
+English & Spanish
