@@ -65,7 +65,7 @@ export default defineConfig({
         { type: 'object', name: 'navigation', label: 'Navigation', list: true,
           ui: { itemProps: (item) => ({ label: item.label || 'New link' }) },
           fields: [
-            { type: 'boolean', name: 'visible', label: 'Show in navigation', ui: { defaultValue: true } },
+            { type: 'boolean', name: 'hidden', label: 'Hidden', ui: { defaultValue: false } },
             { type: 'string', name: 'label', label: 'Link text', required: true },
             { type: 'string', name: 'url', label: 'Link URL', required: true },
           ],
