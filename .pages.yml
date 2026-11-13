@@ -13,18 +13,19 @@ content:
     label: Pages
     type: collection
     path: src/content/pages
-    filename: "{fields.slug}.md"
+    filename: "{primary}.md"
     view:
-      fields: [title, slug, published, showInNavigation]
+      fields: [title, published, showInNavigation]
       primary: title
       sort: [navOrder, title]
     fields:
       - { name: title, label: Page title, type: string, required: true }
-      - { name: slug, label: URL slug, type: string, required: true, description: "Use lowercase words separated by hyphens. The page is published at /this-slug/." }
-      - { name: navLabel, label: Navigation label, type: string, required: true }
-      - { name: navOrder, label: Navigation order, type: number, default: 100 }
+      - { name: body, label: Page content, type: rich-text, required: false }
       - { name: showInNavigation, label: Show in navigation, type: boolean, default: true }
       - { name: published, label: Published, type: boolean, default: true }
+      - { name: slug, label: Custom URL slug (optional), type: string, required: false, description: "Leave blank to use the page filename. Existing page URLs are preserved." }
+      - { name: navLabel, label: Custom navigation label (optional), type: string, required: false, description: "Leave blank to use the page title." }
+      - { name: navOrder, label: Navigation order, type: number, default: 100 }
       - name: template
         label: Page style
         type: select
@@ -39,7 +40,6 @@ content:
             - { value: articles-index, label: Articles index }
       - { name: description, label: Search description, type: text }
       - { name: image, label: Page image, type: image, required: false }
-      - { name: body, label: Page content, type: rich-text, required: true }
 
   - name: articles
     label: Articles
