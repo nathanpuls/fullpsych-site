@@ -4,7 +4,8 @@ export default {
   eleventyComputed: {
     permalink: (data) => {
       if (data.published === false) return false;
-      return data.slug === "home" ? "/index.html" : `/${data.slug}/index.html`;
+      const pageSlug = data.slug || data.page.fileSlug;
+      return pageSlug === "home" ? "/index.html" : `/${pageSlug}/index.html`;
     }
   }
 };
