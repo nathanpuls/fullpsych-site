@@ -1,6 +1,10 @@
 name: Publish FullPsych
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - publish.json
   workflow_dispatch:
     inputs:
       payload:
