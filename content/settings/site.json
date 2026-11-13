@@ -9,6 +9,7 @@
   "web3formsKey": "1fc62d81-a196-443c-93cf-cd40d43674a5",
   "showFooter": true,
   "footerText": "Admin",
+  "footerLink": "/admin",
   "footerSecondaryText": "Telehealth in Texas & Washington",
   "navigation": [
     {
