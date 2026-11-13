@@ -11,6 +11,13 @@ const contentFields = [
 export default defineConfig({
   branch: process.env.GITHUB_BRANCH || 'main',
   cmsCallback: (cms) => {
+    // Keep the publish trigger in the schema, but hide its internal collection link.
+    if (typeof document !== 'undefined' && !document.getElementById('fullpsych-hide-publish-request')) {
+      const style = document.createElement('style');
+      style.id = 'fullpsych-hide-publish-request';
+      style.textContent = 'a[href*="/collections/publishRequest"] { display: none !important; }';
+      document.head.appendChild(style);
+    }
     cms.plugins.add({ __type: 'screen', name: 'View site', navCategory: 'Site', layout: 'fullscreen', Icon: ViewSiteIcon, Component: ViewSiteScreen });
     cms.plugins.add({ __type: 'screen', name: 'Publish', navCategory: 'Site', layout: 'fullscreen', Icon: PublishIcon, Component: () => PublishScreen({ cms }) });
     return cms;
