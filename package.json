@@ -1,9 +1,26 @@
 {
-  "name": "fullpsych-site",
-  "version": "1.0.0",
+  "name": "fullpsych-tina-local-test",
   "private": true,
   "type": "module",
-  "description": "FullPsych static website with Pages CMS content editing",
-  "scripts": { "build": "eleventy", "dev": "eleventy --serve" },
-  "devDependencies": { "@11ty/eleventy": "^3.1.2" }
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "scripts": {
+    "dev": "tinacms dev -c \"astro dev --host 127.0.0.1 --port 4322\"",
+    "build": "tinacms build --local --skip-cloud-checks -c \"astro build\"",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^6.4.4",
+    "@astrojs/node": "^10.1.4",
+    "@tinacms/astro": "^0.8.0",
+    "tinacms": "^3.15.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@tinacms/cli": "^4.0.4",
+    "typescript": "^6.0.3"
+  }
 }
+

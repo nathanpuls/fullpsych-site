@@ -1,0 +1,8 @@
+---
+import { tinaField } from '@tinacms/astro';
+const { settings } = Astro.props;
+---
+<nav aria-label="Main navigation" data-tina-field={tinaField(settings, 'navigation')}>
+  {settings?.navigation?.map((item: any) => item && <a href={item.url} data-tina-field={tinaField(item, 'label')}>{item.label}</a>)}
+  <a class="edit-link" href="/admin/index.html">Open editor ↗</a>
+</nav>

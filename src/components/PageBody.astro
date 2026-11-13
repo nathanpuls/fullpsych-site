@@ -1,0 +1,14 @@
+---
+import TinaMarkdown from '@tinacms/astro/TinaMarkdown.astro';
+import { tinaField } from '@tinacms/astro';
+const { data } = Astro.props;
+---
+{data && <div class:list={['page', { 'with-portrait': !!data.image }]}>
+  <article>
+    <p class="eyebrow">CARE THAT STARTS WITH LISTENING</p>
+    {data.heading && <h1 data-tina-field={tinaField(data, 'heading')}>{data.heading}</h1>}
+    <div class="prose" data-tina-field={tinaField(data, 'body')}><TinaMarkdown content={data.body} /></div>
+  </article>
+  {data.image && <aside><img class="portrait" src={data.image} alt="Nathan Puls" data-tina-field={tinaField(data, 'image')} /></aside>}
+</div>}
+

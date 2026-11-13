@@ -1,0 +1,32 @@
+---
+import '../styles/site.css';
+import TinaIsland from '@tinacms/astro/TinaIsland.astro';
+import Navigation from '../components/Navigation.astro';
+import { getSettings } from '../lib/data';
+import { islands } from '../lib/islands';
+const settingsResult = await getSettings();
+const { title, description, page } = Astro.props;
+---
+<!doctype html>
+<html lang="en" data-accent="blue" data-width="comfortable">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width" />
+<meta name="description" content={description || ''} /><meta name="robots" content="noindex,nofollow" />
+<title>{title} · FullPsych Tina test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+<div class="prototype-banner">FullPsych · TinaCMS test <span>Local experiment · production unchanged</span></div>
+<header class="site-header">
+<a class="brand" href="/"><img src="/assets/logo.png" alt="" /><span>FullPsych</span></a>
+<TinaIsland name="navigation" wrapper={islands.navigation.wrapper}>
+  <Navigation settings={settingsResult.data?.settings} />
+</TinaIsland>
+</header>
+<slot />
+<footer><strong>FullPsych</strong><span>English & Spanish · Telehealth</span><a href="/admin/index.html">Open TinaCMS ↗</a></footer>
+</body>
+</html>
+
