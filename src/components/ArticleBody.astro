@@ -1,0 +1,12 @@
+---
+import TinaMarkdown from '@tinacms/astro/TinaMarkdown.astro';
+import { tinaField } from '@tinacms/astro';
+import { readableDate } from '../lib/content';
+const { data } = Astro.props;
+---
+<article class="article-page page-width">
+  <a class="article-back" href="/articles/">← All articles</a>
+  <header>{data.date && <p class="eyebrow">{readableDate(data.date)}</p>}<h1 data-tina-field={tinaField(data, 'title')}>{data.title}</h1>{data.description && <p class="article-lead" data-tina-field={tinaField(data, 'description')}>{data.description}</p>}</header>
+  {data.image && <img class="article-image" src={data.image} alt={data.imageAlt || ''} data-tina-field={tinaField(data, 'image')} />}
+  <div class="prose article-body" data-tina-field={tinaField(data, 'body')}><TinaMarkdown content={data.body} /></div>
+</article>

@@ -1,0 +1,31 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import EditableRegion from '../components/EditableRegion.astro';
+import Header from '../components/Header.astro';
+import { getSettings } from '../lib/data';
+const { title, description, home = false } = Astro.props;
+const result = await getSettings();
+const settings = result.data.settings;
+---
+<!doctype html>
+<html lang="en" transition:animate="none">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description || settings.description} />
+  <meta name="theme-color" content="#ffffff" />
+  <title>{home ? settings.name : `${title} · ${settings.name}`}</title>
+  <link rel="canonical" href={new URL(Astro.url.pathname, settings.url)} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/site.css" />
+  <ClientRouter fallback="swap" />
+</head>
+<body>
+  <EditableRegion name="header" wrapper={{ tag: 'div' }} params={{ pathname: Astro.url.pathname }}>
+    <Header settings={settings} />
+  </EditableRegion>
+  <slot />
+  <footer class="site-footer"><span>{settings.name}</span><span>Telehealth in Texas &amp; Washington</span></footer>
+</body>
+</html>

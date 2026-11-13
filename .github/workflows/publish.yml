@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       payload:
-        description: Optional Pages CMS context
+        description: Optional publishing context
         required: false
         type: string
 
@@ -27,12 +27,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
           cache: npm
       - run: npm ci
       - run: npm run build
       - name: Deploy to existing Cloudflare Pages project
-        run: npx --yes wrangler@4 pages deploy _site --project-name fullpsych-site --branch main
+        run: npx --yes wrangler@4 pages deploy dist --project-name fullpsych-site --branch main
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ed3b0af15e1c2b8a6a351cc929b0a312

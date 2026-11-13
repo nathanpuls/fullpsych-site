@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Site.astro';
+import PageBody from '../components/PageBody.astro';
+import EditableRegion from '../components/EditableRegion.astro';
+import { entries } from '../lib/content';
+import { getPage, getSettings } from '../lib/data';
+export function getStaticPaths() {
+  return entries('pages').map((entry: any) => ({ params: { slug: entry.slug === 'home' ? undefined : entry.slug }, props: { file: entry.file } }));
+}
+const { file } = Astro.props;
+const result = await getPage(file);
+const data = result.data.page;
+if (!data) throw new Error(`Unable to load page: ${file}`);
+const settings = (await getSettings()).data.settings;
+---
+<Layout title={data.title} description={data.description} home={data.slug === 'home'}>
+  <EditableRegion name="page" wrapper={{ tag: 'main' }} params={{ file }} primary>
+    <PageBody data={data} settings={settings} />
+  </EditableRegion>
+</Layout>

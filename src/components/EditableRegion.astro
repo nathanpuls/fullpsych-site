@@ -1,0 +1,6 @@
+---
+import TinaIsland from '@tinacms/astro/TinaIsland.astro';
+const { wrapper } = Astro.props;
+const Tag = wrapper.tag;
+---
+{import.meta.env.DEV ? <TinaIsland {...Astro.props}><slot /></TinaIsland> : <Tag class={wrapper.className}><slot /></Tag>}

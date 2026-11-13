@@ -1,34 +1,48 @@
 # FullPsych
 
-Eleventy + Pages CMS + Cloudflare Pages. Edit and publish from `main` only.
+Astro + TinaCMS, with GitHub as the source of truth and deliberate publishing to the existing Cloudflare Pages project `fullpsych-site` at https://fullpsych.com.
 
-## Edit, preview, publish
+## Editing on the Mac
 
-1. Edit in [Pages CMS](https://app.pagescms.org/nathanpuls/fullpsych-site/main) or GitHub.
-2. Preview `main` in [StackBlitz](https://stackblitz.com/github/nathanpuls/fullpsych-site). Run `npm ci` and `npm run dev` if it does not start automatically. Reload the project to pick up later GitHub edits.
-3. Click **Publish** in Pages CMS or **Run workflow** in [Publish FullPsych](https://github.com/nathanpuls/fullpsych-site/actions/workflows/publish.yml). This builds the selected main commit and deploys to the existing Cloudflare Pages project serving fullpsych.com.
+Double-click **Edit-FullPsych.command**. Tina opens at http://localhost:4323/admin/index.html#/~/ with a live website preview. Leave its Terminal window running.
 
-The workflow runs when manually dispatched or when `publish.json` changes on `main`. It refuses other branches. Ordinary content edits do not trigger this workflow.
+- **Pages**: all five existing pages, text, images, descriptions, and existing page layouts. Headings are edited in the content, with no extra required heading field.
+- **Articles**: existing articles and future posts. Only published content goes to production.
+- **Site Settings**: navigation (add, remove, rename, drag to reorder), site identity, logo, default portrait, and the existing contact form key.
+- Save writes Markdown/MDX or JSON locally. Previewing does not deploy or consume a Cloudflare build.
 
-## Publish through ChatGPT or Voice
+**Update-FullPsych.command** pulls GitHub changes when the working copy is clean. The running Astro preview refreshes. It stops if local edits need reconciling rather than overwriting them. Opening Edit FullPsych also pulls when clean.
 
-When explicitly asked to **Publish FullPsych**, update `publish.json` on `main`: increment `revision` by one. Commit that change with a normal commit message (do not use `[skip ci]` or `[CF-Pages-Skip]`). This triggers the same Publish FullPsych workflow used by Pages CMS. Do not modify this file during ordinary content edits. Its contents are a publish signal, not site content.
+**Publish-FullPsych.command** commits and pushes saved local changes, updating `publish.json` to request the existing GitHub Action. Commit and push can also be done with ordinary Git tools.
 
-ChatGPT's connected GitHub tools do not expose workflow dispatch, but repository write tools can update this file. Voice can use this route only when GitHub write tools are available in that conversation. Check the resulting workflow run before reporting a successful deployment.
+## GitHub and publishing
 
-## Deployment setup
+Edit on `main`. Normal commits do not deploy. Publish deliberately using GitHub Actions → Publish FullPsych → Run workflow, or by updating `publish.json`. ChatGPT can update that file when asked to publish; direct workflow dispatch depends on the tools available in the conversation.
 
-- Configured repository Actions secret `CLOUDFLARE_API_TOKEN`: a Cloudflare API token with **Account → Cloudflare Pages → Edit**, restricted to account `ed3b0af15e1c2b8a6a351cc929b0a312`.
-- The existing project is `fullpsych-site`, production branch `main`, output `_site`.
-- Publishing through `publish.json` was verified successfully: https://github.com/nathanpuls/fullpsych-site/actions/runs/43357467587
-- Cloudflare automatic production deployments are disabled; preview branch deployments are set to None.
-- If Pages CMS requests updated GitHub App access, approve **Actions: read and write** for this repository so its Publish action can dispatch the workflow.
+The Action runs `npm ci`, builds Astro, and deploys `dist/` using Wrangler to the existing Cloudflare project. Existing `CLOUDFLARE_API_TOKEN` repository secret and account ID remain in use. Cloudflare automatic builds remain disabled. DNS and custom domains are unchanged.
 
-GitHub content edits remain unpublished until an explicit publish request. Credentials are already configured and do not need to be requested for normal publishing.
+## Development
 
-## Local preview
+Node 24 LTS is recommended (Tina CLI supports Node 22 and 24).
 
 ```sh
 npm ci
 npm run dev
+# In another terminal, after stopping the preview when needed:
+npm run build
+npm run preview
 ```
+
+Content lives in `content/pages/*.mdx`, `content/articles/*.mdx`, and `content/settings/site.json`. Astro components live in `src/components` and `src/layouts`. Production builds use the checked-out content, including GitHub edits, rather than a remote CMS cache.
+
+The original five page URLs, `/articles/art1/`, published status, article date, content, images, contact form endpoint, 404, sitemap, and crawler rules are preserved. Markdown bodies are copied verbatim. Legacy nav metadata remains in the content for reference; **Site Settings → Navigation** now controls links.
+
+## Tina account and hosting
+
+Tina is configured in local mode: no additional token or TinaCloud account is needed. Its official Astro integration supplies live editing on the Mac. The production output is static and deliberately excludes the local-only admin and API. `/admin/` on the public site is not a hosted editor.
+
+Editing from another computer without running the project locally would require connecting the GitHub repository to a TinaCloud project (or hosting Tina's data layer). That is a separate account setup, not required for this workflow. Nothing automatically pushes or reconciles unsaved local edits with GitHub.
+
+## Migration / rollback
+
+Eleventy and Pages CMS configuration have been replaced. The previous production source remains in Git history at `99dda0a33c8291c1a3d6ac1820518bc9ba5a536b`. To roll back, restore that revision's source and deploy it with its `_site` workflow. Prototype branches and local test folders are separate experiments and are not production content.

@@ -6,5 +6,27 @@
   "url": "https://fullpsych.com",
   "logo": "/assets/logo.png",
   "portrait": "/assets/nathan-puls.png",
-  "web3formsKey": "1fc62d81-a196-443c-93cf-cd40d43674a5"
+  "web3formsKey": "1fc62d81-a196-443c-93cf-cd40d43674a5",
+  "navigation": [
+    {
+      "label": "home",
+      "url": "/"
+    },
+    {
+      "label": "about",
+      "url": "/about/"
+    },
+    {
+      "label": "approach",
+      "url": "/approach/"
+    },
+    {
+      "label": "articles",
+      "url": "/articles/"
+    },
+    {
+      "label": "contact",
+      "url": "/contact/"
+    }
+  ]
 }

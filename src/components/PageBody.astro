@@ -1,0 +1,24 @@
+---
+import TinaMarkdown from '@tinacms/astro/TinaMarkdown.astro';
+import { tinaField } from '@tinacms/astro';
+import { articles, readableDate } from '../lib/content';
+const { data, settings } = Astro.props;
+const template = data.template || 'standard';
+const classes: Record<string, string> = { home: 'home-hero', profile: 'profile-page page-width', approach: 'approach-page page-width prose', contact: 'contact-page page-width', 'articles-index': 'articles-index page-width', standard: 'standard-page page-width prose' };
+---
+<section class={classes[template] || classes.standard}>
+  {template === 'profile' ? <div class="profile-grid">
+    <article class="prose" data-tina-field={tinaField(data, 'body')}><TinaMarkdown content={data.body} /></article>
+    <figure class="profile-photo"><img src={data.image || settings.portrait} alt={`Portrait of ${settings.practitioner}`} data-tina-field={tinaField(data, 'image')} /></figure>
+  </div> : <div class:list={['prose', { 'home-hero__copy': template === 'home', 'contact-intro': template === 'contact' }]} data-tina-field={tinaField(data, 'body')}><TinaMarkdown content={data.body} /></div>}
+  {template === 'contact' && <form class="contact-form" action="https://api.web3forms.com/submit" method="post" data-astro-reload>
+    <input type="hidden" name="access_key" value={settings.web3formsKey} />
+    <label for="name">Name</label><input id="name" name="name" autocomplete="name" required />
+    <label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required />
+    <label for="message">Message</label><textarea id="message" name="message" rows="7" required></textarea>
+    <button type="submit">Send message</button>
+  </form>}
+  {template === 'articles-index' && <div class="article-list">
+    {articles().length ? articles().map((article: any) => <article><p class="eyebrow">{readableDate(article.date)}</p><h2><a href={`/articles/${article.slug}/`}>{article.title}</a></h2>{article.description && <p>{article.description}</p>}</article>) : <p class="empty-state">Articles will appear here when they are published.</p>}
+  </div>}
+</section>

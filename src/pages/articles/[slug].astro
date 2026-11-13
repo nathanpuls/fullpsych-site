@@ -1,0 +1,14 @@
+---
+import Layout from '../../layouts/Site.astro';
+import ArticleBody from '../../components/ArticleBody.astro';
+import EditableRegion from '../../components/EditableRegion.astro';
+import { entries } from '../../lib/content';
+import { getArticle } from '../../lib/data';
+export function getStaticPaths() { return entries('articles').map((entry: any) => ({ params: { slug: entry.slug }, props: { file: entry.file } })); }
+const { file } = Astro.props;
+const data = (await getArticle(file)).data.article;
+if (!data) throw new Error(`Unable to load article: ${file}`);
+---
+<Layout title={data.title} description={data.description}>
+  <EditableRegion name="article" wrapper={{ tag: 'main' }} params={{ file }} primary><ArticleBody data={data} /></EditableRegion>
+</Layout>
