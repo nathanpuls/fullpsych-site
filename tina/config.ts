@@ -1,5 +1,5 @@
 import { defineConfig } from 'tinacms';
-import { PublishScreen, PublishIcon } from './PublishScreen';
+import { PublishScreen, PublishIcon, ViewSiteIcon, ViewSiteScreen } from './PublishScreen';
 const contentFields = [
   { type: 'string', name: 'title', label: 'Page name', isTitle: true, required: true },
   { type: 'string', name: 'slug', label: 'URL slug', required: true, description: 'Use home for the homepage. Keep existing slugs to preserve links.', ui: { validate: (value: string) => /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value || '') ? undefined : 'Use lowercase letters, numbers, and hyphens.' } },
@@ -11,6 +11,7 @@ const contentFields = [
 export default defineConfig({
   branch: process.env.GITHUB_BRANCH || 'main',
   cmsCallback: (cms) => {
+    cms.plugins.add({ __type: 'screen', name: 'View site', navCategory: 'Site', layout: 'fullscreen', Icon: ViewSiteIcon, Component: ViewSiteScreen });
     cms.plugins.add({ __type: 'screen', name: 'Publish', navCategory: 'Site', layout: 'fullscreen', Icon: PublishIcon, Component: () => PublishScreen({ cms }) });
     return cms;
   },
