@@ -13,6 +13,10 @@
   "footerSecondaryText": "Telehealth in Texas & Washington",
   "navigation": [
     {
+      "label": "contact",
+      "url": "/contact/"
+    },
+    {
       "label": "home",
       "url": "/"
     },
@@ -27,10 +31,6 @@
     {
       "label": "articles",
       "url": "/articles/"
-    },
-    {
-      "label": "contact",
-      "url": "/contact/"
     }
   ]
 }
