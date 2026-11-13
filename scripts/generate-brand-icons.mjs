@@ -43,8 +43,8 @@ for (const size of [192, 512]) await icon(`android-chrome-${size}.png`, size, Ma
 // The full rectangular logo fits within the circular safe zone of Android masks.
 await icon('android-maskable-512.png', 512, 116, true);
 await icon('mstile-144.png', 144, 12, true);
-await sharp(source).resize(560, 500, { fit: 'inside' }).toBuffer().then(async image => {
-  await sharp({ create: { width: 1200, height: 630, channels: 4, background: white } })
+await sharp(source).resize(340, 340, { fit: 'inside' }).toBuffer().then(async image => {
+  await sharp({ create: { width: 512, height: 512, channels: 4, background: white } })
     .composite([{ input: image, gravity: 'centre' }]).png().toFile(resolve(output, 'social-preview.png'));
 });
 
