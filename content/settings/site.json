@@ -30,7 +30,8 @@
     },
     {
       "label": "articles",
-      "url": "/articles/"
+      "url": "/articles/",
+      "hidden": true
     }
   ]
 }
