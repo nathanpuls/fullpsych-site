@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { TinaCMS } from 'tinacms';
 export function PublishIcon() { return <span aria-hidden="true">↑</span>; }
 export function PublishScreen({ cms }: { cms: TinaCMS }) {
@@ -32,4 +32,10 @@ export function PublishScreen({ cms }: { cms: TinaCMS }) {
     {message && <p role="status" style={{ margin: '20px 0', lineHeight: 1.6 }}>{message}</p>}
     <p style={{ marginTop: '24px' }}><a href="https://github.com/nathanpuls/fullpsych-site/actions/workflows/publish.yml" target="_blank" rel="noreferrer">View deployment status ↗</a></p>
   </div>;
+}
+
+export function ViewSiteIcon() { return <span aria-hidden="true">↗</span>; }
+export function ViewSiteScreen() {
+  useEffect(() => { window.location.assign('/admin'); }, []);
+  return <p style={{ padding: '24px' }}>Opening site…</p>;
 }
