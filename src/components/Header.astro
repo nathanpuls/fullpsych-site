@@ -13,4 +13,4 @@ const { settings, pathname = Astro.url.pathname } = Astro.props;
     {settings.navigation?.map((item: any) => item && item.hidden !== true && <a href={item.url} aria-current={item.url === pathname ? 'page' : undefined} data-tina-field={tinaField(item, 'label')}>{item.label}</a>)}
   </nav>
 </header>
-<script is:inline src="/assets/navigation.js"></script>
+<script src="../scripts/navigation.js"></script>

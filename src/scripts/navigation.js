@@ -1,3 +1,4 @@
+// Bundled by Astro so updates receive a new asset URL.
 (() => {
   if (window.fullPsychMenuInitialized) return;
   window.fullPsychMenuInitialized = true;
