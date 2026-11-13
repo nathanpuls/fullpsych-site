@@ -4,7 +4,7 @@ Astro + TinaCMS, with GitHub as the source of truth and deliberate publishing to
 
 ## Editing on the Mac
 
-Double-click **Edit-FullPsych.command**. Tina opens at http://localhost:4323/admin/index.html#/~/ with a live website preview. Leave its Terminal window running.
+Double-click **Edit-FullPsych.command**. It starts the local server, waits for it to become ready, and opens the editor. Tina opens at http://localhost:4323/admin/index.html#/~/ with a live website preview. The server runs in the background; closing the launcher window does not stop it. Reopen the launcher whenever you need the editor.
 
 - **Pages**: all five existing pages, text, images, descriptions, and existing page layouts. Headings are edited in the content, with no extra required heading field.
 - **Articles**: existing articles and future posts. Only published content goes to production.
@@ -13,7 +13,7 @@ Double-click **Edit-FullPsych.command**. Tina opens at http://localhost:4323/adm
 
 **Update-FullPsych.command** pulls GitHub changes when the working copy is clean. The running Astro preview refreshes. It stops if local edits need reconciling rather than overwriting them. Opening Edit FullPsych also pulls when clean.
 
-**Publish-FullPsych.command** commits and pushes saved local changes, updating `publish.json` to request the existing GitHub Action. Commit and push can also be done with ordinary Git tools.
+**Tina → Publish → Publish FullPsych** commits and pushes saved local changes, updating `publish.json` to request the existing GitHub Action. The same action is also available through **Publish-FullPsych.command**. The publishing handler runs only on the local development server, with the Mac’s existing GitHub authentication. Commit and push can also be done with ordinary Git tools.
 
 ## GitHub and publishing
 

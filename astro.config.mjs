@@ -13,7 +13,10 @@ export default defineConfig({
   integrations: [tina(), {
     name: 'tina-local-preview',
     hooks: { 'astro:config:setup': ({ command, injectRoute }) => {
-      if (command === 'dev') injectRoute({ pattern: '/tina-island/[name]', entrypoint: './src/tina/island-route.ts', prerender: false });
+      if (command === 'dev') {
+        injectRoute({ pattern: '/tina-island/[name]', entrypoint: './src/tina/island-route.ts', prerender: false });
+        injectRoute({ pattern: '/api/fullpsych/publish', entrypoint: './src/tina/publish-route.ts', prerender: false });
+      }
     } },
   }],
 });
