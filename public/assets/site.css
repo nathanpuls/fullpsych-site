@@ -86,3 +86,7 @@ a { color: inherit; text-underline-offset: 4px; }
   .site-footer span { display: block; margin: 4px 0; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Keep the shared header sticky inside the editable region wrapper. */
+.site-header-wrapper { position: sticky; top: 0; z-index: 1000; }
+.page-content { min-height: calc(100vh - 130px); outline: none; }

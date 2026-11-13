@@ -14,7 +14,7 @@ if (!data) throw new Error(`Unable to load page: ${file}`);
 const settings = (await getSettings()).data.settings;
 ---
 <Layout title={data.title} description={data.description} home={data.slug === 'home'}>
-  <EditableRegion name="page" wrapper={{ tag: 'main' }} params={{ file }} primary>
+  <EditableRegion name="page" wrapper={{ tag: 'main', className: 'page-content' }} params={{ file }} primary>
     <PageBody data={data} settings={settings} />
   </EditableRegion>
 </Layout>

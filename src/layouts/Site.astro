@@ -22,7 +22,7 @@ const settings = result.data.settings;
   <ClientRouter fallback="swap" />
 </head>
 <body>
-  <EditableRegion name="header" wrapper={{ tag: 'div' }} params={{ pathname: Astro.url.pathname }}>
+  <EditableRegion name="header" wrapper={{ tag: 'div', className: 'site-header-wrapper' }} params={{ pathname: Astro.url.pathname }}>
     <Header settings={settings} />
   </EditableRegion>
   <slot />

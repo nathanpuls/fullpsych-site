@@ -10,5 +10,5 @@ const data = (await getArticle(file)).data.article;
 if (!data) throw new Error(`Unable to load article: ${file}`);
 ---
 <Layout title={data.title} description={data.description}>
-  <EditableRegion name="article" wrapper={{ tag: 'main' }} params={{ file }} primary><ArticleBody data={data} /></EditableRegion>
+  <EditableRegion name="article" wrapper={{ tag: 'main', className: 'page-content' }} params={{ file }} primary><ArticleBody data={data} /></EditableRegion>
 </Layout>
