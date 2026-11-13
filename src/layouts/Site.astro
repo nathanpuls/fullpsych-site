@@ -30,10 +30,10 @@ const settings = result.data.settings;
   <meta property="og:description" content={description || settings.description} />
   <meta property="og:url" content={new URL(Astro.url.pathname, settings.url).href} />
   <meta property="og:image" content={new URL(`${brandIcons.base}/social-preview.png`, settings.url).href} />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+  <meta property="og:image:width" content="512" />
+  <meta property="og:image:height" content="512" />
   <meta property="og:image:alt" content={`${settings.name} logo`} />
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content={home ? settings.name : `${title} · ${settings.name}`} />
   <meta name="twitter:description" content={description || settings.description} />
   <meta name="twitter:image" content={new URL(`${brandIcons.base}/social-preview.png`, settings.url).href} />
